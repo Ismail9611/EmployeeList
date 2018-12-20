@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee record</title>
+</head>
+<body>
+
+<table border="1px">
+    <tr>
+        <th>Id</th>
+        <th>Full name</th>
+        <th>Age</th>
+        <th>Job title</th>
+        <th>Home city</th>
+        <th>Experience</th>
+        <th>Photo</th>
+    </tr>
+    <tr>
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.fullName}"></td>
+        <td th:text="${employee.age}"></td>
+        <td th:text="${employee.jobTitle}"></td>
+        <td th:text="${employee.homeCity}"></td>
+        <td th:text="${employee.experience}"></td>
+        <td><img th:src="${employee.photoUrl}"></td>
+    </tr>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees list</title>
+</head>
+<body>
+
+<div th:if="${not #lists.isEmpty(allEmployees)}">
+    <table border="1px">
+        <tr>
+            <th>Id</th>
+            <th>Full name</th>
+            <th>Age</th>
+            <th>Job title</th>
+            <th>Home city</th>
+            <th>Experience</th>
+            <th>Photo</th>
+        </tr>
+        <th:block th:each="employee : ${allEmployees}">
+            <tr>
+                <td th:text="${employee.id}"></td>
+                <td><a th:text="${employee.fullName}" th:href="@{/employee/{id} (id=${employee.id})}"></a> </td>
+                <td th:text="${employee.age}"></td>
+                <td th:text="${employee.jobTitle}"></td>
+                <td th:text="${employee.homeCity}"></td>
+                <td th:text="${employee.experience}"></td>
+                <td><img th:src="@{${employee.photoUrl}}" width="64" height="64"></td>
+            </tr>
+        </th:block>
+    </table>
+    <input type="button" onclick="location.href='/delete_all'" value="Clear">
+</div>
+
+<div>
+    <h3>Add employee:</h3>
+    <form enctype="multipart/form-data" method="post" th:action="@{/add_employee}">
+        <p>Full name:</p>
+        <input type="text" name="emp_full_name">
+        <p>Age</p>
+        <input type="number" name="emp_age">
+        <p>Job title</p>
+        <input type="text" name="emp_job_title">
+        <p>Home city:</p>
+        <select name="emp_home_city">
+            <option>Baku</option>
+            <option>London</option>
+            <option>Moscow</option>
+        </select>
+        <p>Experience</p>
+        <select name="experience">
+            <option>1-3 years</option>
+            <option>3-5 years</option>
+            <option>5+ years</option>
+        </select>
+        <p>Select your photo</p>
+        <input type="file" name="emp_photo" multiple required>
+        <input type="submit" value="Save">
+    </form>
+</div>
+
+
+</body>
+</html>
