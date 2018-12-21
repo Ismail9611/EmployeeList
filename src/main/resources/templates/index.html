@@ -25,7 +25,9 @@
                 <td th:text="${employee.jobTitle}"></td>
                 <td th:text="${employee.homeCity}"></td>
                 <td th:text="${employee.experience}"></td>
-                <td><img th:src="@{${employee.photoUrl}}" width="64" height="64"></td>
+                <td>
+                    <img th:src="@{${employee.photoUrl}}" width="128" height="128">
+                </td>
             </tr>
         </th:block>
     </table>

@@ -49,10 +49,9 @@ public class MainController {
                               @RequestParam(name = "experience") String experience,
                               @RequestParam(name = "emp_photo") MultipartFile multipartPhoto) throws IOException {
         Employee employee = new Employee(fullName, age, jobTitle, homeCity, experience);
-        String photoUrl = employeesPhotoUrl + "/" + multipartPhoto.getOriginalFilename();
+        String photoUrl = employeesPhotoUrl + multipartPhoto.getOriginalFilename();
         employee.setPhotoUrl(photoUrl);
-        System.out.println(photoUrl);
-        File file = multipartToFile(multipartPhoto);
+        File file = multipartToFile(multipartPhoto, photoUrl);
         employeeRepository.save(employee);
         return "redirect:index";
     }
@@ -73,9 +72,9 @@ public class MainController {
         return "redirect:index";
     }
 
-    private File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException {
+    private File multipartToFile(MultipartFile multipart, String photoUrl) throws IllegalStateException, IOException {
         if (multipart == null) throw new NullPointerException();
-        File convFile = new File(employeesPhotoUrl + "/" + multipart.getOriginalFilename());
+        File convFile = new File(photoUrl);
         multipart.transferTo(convFile);
         return convFile;
     }
